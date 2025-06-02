@@ -228,6 +228,62 @@ print(response.json())  # Should show "ok": true
    python main.py
    ```
 
+## Testing Your Setup
+
+Before deploying to Railway, it's recommended to test your Motion API connection locally to ensure everything is configured correctly.
+
+### **Test Motion API Connection**
+
+The project includes a comprehensive test script to validate your Motion API setup:
+
+```bash
+python test_motion_api.py
+```
+
+**What it tests:**
+- ✅ **API Key validation** - Confirms your Motion API key is working
+- ✅ **User authentication** - Verifies you can access your Motion account
+- ✅ **Workspace access** - Lists all your workspaces and confirms the target workspace ID
+- ✅ **Task retrieval** - Tests fetching tasks from your workspace
+- ✅ **Completed tasks** - Shows recent completed tasks to verify the integration will work
+
+**Example output:**
+```
+🧪 Testing Motion API Connection...
+
+✅ API Key found: dI/Bnrgo/qjVSyn3H5Cr...
+✅ Workspace ID: L8YNMqtk32fD7WkMl8Nym
+
+🔍 Test 1: Getting user info...
+✅ User: Patrick Skinner (patrick@clgcorporation.com)
+
+🔍 Test 2: Listing workspaces...
+✅ Found 6 workspace(s):
+  ✅ NVM (L8YNMqtk32fD7WkMl8Nym)
+  ⚪ My Tasks (Private) (K4lCA17lbuLxwD5aVaiGG)
+  ...
+
+🔍 Test 3: Checking workspace L8YNMqtk32fD7WkMl8Nym...
+✅ Workspace ID is valid and accessible
+
+🔍 Test 4: Getting tasks from workspace...
+✅ Found 204 tasks in workspace
+✅ Found 87 completed tasks
+
+🎉 All Motion API tests passed! The API is working correctly.
+```
+
+**If the test fails**, it will show you exactly what's wrong and suggest fixes:
+- Invalid API key → Regenerate your Motion API key
+- 401 Unauthorized → Check if you have Team/Enterprise plan (Individual plans don't have API access)
+- Workspace not found → Verify your workspace ID is correct
+
+**Run this test whenever:**
+- Setting up the integration for the first time
+- Getting deployment errors
+- Suspecting Motion API issues
+- After changing API keys or workspace IDs
+
 ## Configuration
 
 All configuration is done via environment variables. Create a `.env` file with:
@@ -273,6 +329,15 @@ When a task is completed, the bot posts:
 - **Accountability**: Create a record of completed work
 
 ## Troubleshooting
+
+### Motion API Issues
+
+**First, run the test script to diagnose the problem:**
+```bash
+python test_motion_api.py
+```
+
+This will help identify if the issue is with your API key, workspace access, or Motion plan.
 
 ### Motion API Access
 - **"Unauthorized" errors?** Make sure you have a Team or Enterprise Motion plan - Individual plans don't include API access
@@ -361,4 +426,3 @@ Contributions are welcome! This project is open source and we'd love your help m
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 Copyright (c) 2025 Patrick Skinner (PSkinnerTech)
-
