@@ -1,6 +1,19 @@
 # Motion to Slack Integration
 
-A simple integration that monitors your Motion tasks and automatically posts to Slack when you complete them. Perfect for keeping your team updated on your progress without manual updates.
+A simple integration that monitors your [Motion](https://usemotion.com) tasks and automatically posts to Slack when you complete them. Perfect for keeping your team updated on your progress without manual updates.
+
+## What is Motion?
+
+[Motion](https://usemotion.com) is an AI-powered productivity platform that combines your calendar, tasks, projects, and meeting assistant into one intelligent app. It uses AI to:
+
+- **Automatically prioritize and schedule your tasks** based on deadlines, dependencies, and your availability
+- **Manage projects with AI** that creates tasks, assigns work, and tracks progress automatically
+- **Take meeting notes** and generate action items without you lifting a finger
+- **Optimize your schedule** hundreds of times per day to ensure you never miss a deadline
+
+Motion helps individuals and teams get work done 2x faster with 90% fewer check-ins, emails, and status update meetings.
+
+## About This Integration
 
 This is a **one-way integration** that:
 - 🔍 Polls Motion every minute for newly completed tasks
@@ -8,6 +21,7 @@ This is a **one-way integration** that:
 - 🚫 Prevents duplicate notifications with state tracking
 - 🔄 Automatically retries on failures
 - 🚀 Deploys easily to Railway (or any Python host)
+- 🛡️ Includes robust error handling and environment validation
 
 ## Quick Start
 
@@ -49,7 +63,7 @@ That's it! The bot will start posting your completed Motion tasks to Slack.
 
 ### 1. Prerequisites
 
-- **Motion account** with API access (Team or Enterprise plan - API not available on Individual plans)
+- **Motion account** with API access (**Team or Enterprise plan required** - [Motion](https://usemotion.com)'s API is not available on Individual plans)
 - **Slack workspace** where you have permission to create apps
 - **Python 3.9+** installed locally for development
 - **Railway account** (free tier works) or another hosting solution
@@ -264,6 +278,13 @@ When a task is completed, the bot posts:
 - **"Unauthorized" errors?** Make sure you have a Team or Enterprise Motion plan - Individual plans don't include API access
 - **Can't find API settings?** Look under Settings → API & Integrations (only visible on Team/Enterprise plans)
 
+### Environment Variables Not Loading in Railway?
+The integration now includes enhanced error reporting that will show you exactly which environment variables are missing and what's available. Common fixes:
+1. **Set variables at the service level**: In Railway, click on your service (not just the project) and add variables there
+2. **Use the Raw Editor**: Go to Variables → Raw Editor and paste all variables at once
+3. **Redeploy after changes**: Railway sometimes needs a fresh deployment to pick up new variables
+4. **Check the logs**: The improved error messages will list all available environment variables (with sensitive values hidden)
+
 ### Bot not posting messages?
 1. Check Railway logs: `railway logs`
 2. Ensure bot is invited to the channel: `/invite @Your Bot Name`
@@ -337,4 +358,7 @@ Contributions are welcome! This project is open source and we'd love your help m
 
 ## License
 
-MIT License - feel free to use this in your own projects!
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+Copyright (c) 2025 Patrick Skinner (PSkinnerTech)
+
