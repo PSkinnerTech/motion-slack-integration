@@ -122,7 +122,7 @@ class MotionSlackIntegration:
             message += f"📝 *Description:*\n_{description}_\n\n"
         
         message += f"📁 *Project:* {project_name}\n"
-        message += f"⏱️ *Duration:* {duration}\n"
+        message += f"⏱️ *Expected Duration:* {duration}\n"
         message += f"🎯 *Priority:* {priority}\n"
         message += f"📊 *Status:* {status}\n"
         
