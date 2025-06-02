@@ -28,7 +28,9 @@ This is a **one-way integration** that:
 This integration is designed to be **extremely lightweight** and cost-effective:
 
 ### 📊 **Actual Production Costs**
-- **Monthly cost on Railway**: **~$0.20** 🤯
+- **Railway Hobby Plan**: $5/month (includes $5 usage credit)
+- **Actual integration usage**: **~$0.20/month** 🤯
+- **Remaining credits**: $4.80/month for other projects
 - **Memory usage**: ~760 MB (minimal footprint)
 - **CPU usage**: Nearly zero (spends 99%+ time sleeping)
 - **Network traffic**: Minimal API calls only
@@ -41,7 +43,8 @@ This integration is designed to be **extremely lightweight** and cost-effective:
 - **Optimized API calls**: Only fetches completed tasks, not all tasks
 
 ### 💡 **Cost Comparison**
-- **$0.20/month** = Less than 
+- **Actual usage**: $0.20/month = Only 4% of your Railway plan!
+- **Essentially free**: Uses only $0.20 of your $5 monthly Railway credits
 - **50x cheaper** than typical serverless solutions
 - **Way cheaper** than webhooks or real-time solutions
 - **No complex infrastructure** needed
@@ -194,7 +197,7 @@ print(response.json())  # Should show "ok": true
 
 ### 4. Deploy to Railway
 
-Railway is perfect for this integration due to its **pay-per-use pricing**. Your actual costs will be approximately **$0.20/month** thanks to the integration's efficient design.
+Railway's **Hobby Plan ($5/month)** is perfect for this integration. You get $5 of usage credits monthly, and this integration only uses **~$0.20/month**, leaving you $4.80 for other projects!
 
 1. **Fork or clone this repository**
 
@@ -226,7 +229,7 @@ Railway is perfect for this integration due to its **pay-per-use pricing**. Your
    - Connect your GitHub repo to Railway
    - Railway will auto-deploy on push
 
-**💡 Pro tip**: Railway's usage-based pricing means you only pay for what you use. This lightweight integration costs approximately **20 cents per month** - less than a cup of coffee!
+**💡 Pro tip**: With Railway's Hobby Plan, this integration is essentially "free" since it only uses 4% of your monthly credits!
 
 ### 5. Local Development
 
@@ -295,7 +298,7 @@ python test_motion_api.py
   ⚪ My Tasks (Private) (K4lCA17lbuLxwD5aVaiGG)
   ...
 
-🔍 Test 3: Checking workspace L8YNMqtk32fD7WkMl8Nym...
+🔍 Test 3: Checking workspace L8YNMqtk32fD7WkMl8Ym...
 ✅ Workspace ID is valid and accessible
 
 🔍 Test 4: Getting tasks from workspace...
@@ -347,7 +350,8 @@ When a task is completed, the bot posts:
 ✅ Task Completed: Design new landing page
 📝 Description: Create mockups for the new product landing page
 📁 Project: Website Redesign
-⏱️ Duration: 2h 30m
+⏱️ Expected Duration: 2h 30m
+🎯 Priority: HIGH
 📊 Status: Done
 ✓ Completed at: 3:45 PM
 ```
