@@ -63,7 +63,7 @@ That's it! The bot will start posting your completed Motion tasks to Slack.
 
 ### 1. Prerequisites
 
-- **Motion account** with API access (**Team or Enterprise plan required** - [Motion](https://usemotion.com)'s API is not available on Individual plans)
+- **Motion account** with API access
 - **Slack workspace** where you have permission to create apps
 - **Python 3.9+** installed locally for development
 - **Railway account** (free tier works) or another hosting solution
