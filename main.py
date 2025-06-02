@@ -88,33 +88,51 @@ class MotionSlackIntegration:
         duration = self.format_duration(task.get('duration', 'NONE'))
         status = task.get('status', {}).get('name', 'Completed')
         completed_time = task.get('completedTime', '')
+        priority = task.get('priority', 'MEDIUM')
         
-        # Clean HTML from description (basic cleaning)
+        # Enhanced HTML cleaning for description
         if description:
+            # Remove common HTML tags and replace with appropriate formatting
             description = description.replace('<p>', '').replace('</p>', '\n')
             description = description.replace('<br>', '\n').replace('<br/>', '\n')
-            description = description.strip()
-            # Truncate if too long
-            if len(description) > 200:
-                description = description[:197] + "..."
+            description = description.replace('<div>', '').replace('</div>', '\n')
+            description = description.replace('<strong>', '*').replace('</strong>', '*')
+            description = description.replace('<b>', '*').replace('</b>', '*')
+            description = description.replace('<em>', '_').replace('</em>', '_')
+            description = description.replace('<i>', '_').replace('</i>', '_')
+            description = description.replace('<ul>', '\n').replace('</ul>', '')
+            description = description.replace('<li>', '• ').replace('</li>', '\n')
+            description = description.replace('&nbsp;', ' ')
+            description = description.replace('&amp;', '&')
+            description = description.replace('&lt;', '<')
+            description = description.replace('&gt;', '>')
+            
+            # Clean up extra whitespace and newlines
+            description = '\n'.join(line.strip() for line in description.split('\n') if line.strip())
+            
+            # Truncate if too long but preserve formatting
+            if len(description) > 300:
+                description = description[:297] + "..."
         
-        # Format message
+        # Build the message with enhanced formatting
         message = f"✅ *Task Completed: {name}*\n"
         
+        # Add description if available (this is the main enhancement)
         if description:
-            message += f"📝 Description: _{description}_\n"
+            message += f"📝 *Description:*\n_{description}_\n\n"
         
-        message += f"📁 Project: {project_name}\n"
-        message += f"⏱️ Duration: {duration}\n"
-        message += f"📊 Status: {status}\n"
+        message += f"📁 *Project:* {project_name}\n"
+        message += f"⏱️ *Duration:* {duration}\n"
+        message += f"🎯 *Priority:* {priority}\n"
+        message += f"📊 *Status:* {status}\n"
         
         if completed_time:
             try:
                 completed_dt = datetime.fromisoformat(completed_time.replace('Z', '+00:00'))
                 formatted_time = completed_dt.strftime('%I:%M %p')
-                message += f"✓ Completed at: {formatted_time}"
+                message += f"✓ *Completed at:* {formatted_time}"
             except:
-                pass
+                message += f"✓ *Completed at:* {completed_time}"
         
         return message
     
