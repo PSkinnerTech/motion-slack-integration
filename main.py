@@ -19,6 +19,19 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+# Check for required environment variables
+required_vars = ['MOTION_API_KEY', 'MOTION_WORKSPACE_ID', 'SLACK_BOT_TOKEN']
+missing_vars = [var for var in required_vars if not os.environ.get(var)]
+
+if missing_vars:
+    logger.error(f"Missing required environment variables: {', '.join(missing_vars)}")
+    logger.error("Please set these variables in Railway or create a .env file")
+    logger.error("Current environment variables:")
+    for key in sorted(os.environ.keys()):
+        if not key.startswith('_'):
+            logger.error(f"  {key}: {'***' if any(secret in key.upper() for secret in ['KEY', 'TOKEN', 'SECRET']) else os.environ[key][:20] + '...' if len(os.environ[key]) > 20 else os.environ[key]}")
+    exit(1)
+
 class MotionSlackIntegration:
     def __init__(self):
         self.motion = MotionClient(os.environ['MOTION_API_KEY'])
